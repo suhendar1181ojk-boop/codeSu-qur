@@ -1,0 +1,18 @@
+# Nginx on a VPS: put these inside your server { } block,
+# with "root" pointing at this folder (e.g. root /var/www/my-app;).
+
+location = /sw.js {
+  add_header Cache-Control "no-cache";
+}
+
+location ~ \.webmanifest$ {
+  default_type application/manifest+json;
+}
+
+location = /.well-known/assetlinks.json {
+  try_files /well-known/assetlinks.json =404;
+}
+
+location / {
+  try_files $uri $uri/ /index.html;
+}

@@ -1,0 +1,11 @@
+{
+  "name": "kedai-kopi-wahid-su-qur-pos-pwa",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

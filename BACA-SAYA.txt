@@ -1,0 +1,89 @@
+Kedai Kopi Wahid Su-Qur POS — versi aplikasi HP (PWA)
+======================================================
+
+Folder ini membuat aplikasimu bisa dipasang di layar utama HP seperti aplikasi
+biasa: ikon sendiri, layar penuh, tanpa bilah alamat browser.
+
+Aplikasinya sendiri tetap berjalan di Google (link /exec di bawah). Folder ini
+adalah "bingkai"-nya: ikon, nama, dan halaman yang menampilkan aplikasi itu
+layar penuh.
+
+Link aplikasi: https://script.google.com/macros/s/AKfycbzvUpEhXuXPV_LfAIUjRsAfcDqUwhWHNuHAs6fJZdmqWrky67ION-NtJIkVBvnfpQ0/exec
+
+Folder ini milikmu sepenuhnya. Setelah online di alamatmu sendiri (langkah 1),
+aplikasi yang dipasang dari alamat itu tidak bergantung pada CodeStudio sama
+sekali: bingkainya dari alamatmu, aplikasinya dari Google.
+
+Tanpa folder ini pun bisa: buka link /exec di HP, lalu pilih "Tambah ke
+Layar Utama" (Safari) atau "Tambahkan ke layar utama" (Chrome). Code.gs
+sudah menyiapkannya, jadi di iPhone aplikasinya terbuka layar penuh. Folder
+ini untuk versi yang benar-benar terpasang: ikon sendiri dan bisa dibuka
+walau sinyal putus.
+
+
+LANGKAH 1 — Online-kan folder ini (pilih satu, semuanya gratis)
+------------------------------------------------------------------
+A. Netlify Drop (paling cepat, tanpa akun di awal)
+   1. Buka https://app.netlify.com/drop
+   2. Tarik (drag) folder ini ke halaman itu.
+   3. Kamu dapat alamat seperti https://nama-acak.netlify.app
+      (daftar akun gratis supaya alamatnya permanen dan bisa diganti nama).
+
+B. GitHub Pages
+   1. Buat repository baru di https://github.com/new (Public).
+   2. Add file → Upload files → unggah SEMUA isi folder ini → Commit.
+   3. Settings → Pages → Branch: main, folder / (root) → Save.
+   4. Tunggu 1–2 menit, alamatnya https://username.github.io/nama-repo/
+
+PWA wajib dibuka lewat https:// — keduanya sudah otomatis https.
+
+
+LANGKAH 2 — Pasang di HP
+-------------------------
+Android (Chrome): buka alamat dari langkah 1 → menu ⋮ → "Instal aplikasi"
+                  atau "Tambahkan ke layar utama".
+iPhone (Safari):  buka alamatnya → tombol Bagikan → "Tambah ke Layar Utama".
+
+
+
+HOSTING DI MANA SAJA
+--------------------
+Folder ini statis (HTML, manifest, service worker, ikon) dan semua link-nya
+relatif, jadi bisa ditaruh di akar domain atau di subfolder mana pun. Konfigurasi
+untuk tiap jenis hosting sudah ikut di dalamnya:
+
+- cPanel / hosting biasa (Apache): File Manager → public_html (atau subfolder,
+  misalnya public_html/kasir) → Upload zip → Extract. .htaccess sudah mengatur
+  https, tipe manifest dan cache service worker.
+- VPS dengan Nginx: salin folder ke server (misalnya /var/www/kasir) dan tempel
+  isi nginx.conf.example ke blok server { } situsmu, lalu reload Nginx.
+- Hosting Windows (IIS/Plesk): unggah apa adanya; web.config mengenalkan tipe
+  manifest.
+- Netlify / Cloudflare Pages: tarik foldernya (Netlify Drop) atau hubungkan ke
+  repo; _redirects dan _headers sudah disiapkan.
+- Vercel: "vercel deploy" di folder ini, atau impor dari GitHub; vercel.json ikut.
+- GitHub Pages: unggah semua isi folder (.nojekyll ikut).
+- Node.js (Render, Railway, VPS, "Setup Node.js App" di cPanel): jalankan
+  "npm start" (atau node server.js). Tanpa paket tambahan; port dari variabel PORT.
+- Di dalam proyek Laravel: salin ke public/kasir → buka https://domainmu/kasir/
+- Di dalam proyek Next.js atau React/Vite: salin ke public/kasir → buka
+  https://domainmu/kasir/index.html (Next.js tidak membuka index.html sendiri
+  di subfolder; tambahkan rewrite /kasir → /kasir/index.html kalau ingin tanpa
+  index.html).
+
+Data dan logika aplikasinya tetap di Google (Apps Script + Google Sheets),
+jadi hosting mana pun hanya menyajikan bingkainya — tidak perlu PHP, MySQL
+atau phpMyAdmin. Ingin datanya juga ada di MySQL hostingmu (dikelola lewat
+phpMyAdmin)? Ikuti panduan Migrasi database → MySQL / phpMyAdmin di CodeStudio.
+
+
+PENTING
+-------
+- Saat deploy di Apps Script, pilih "Jalankan sebagai: Saya" dan
+  "Yang memiliki akses: Siapa saja". Login Google di dalam bingkai sering
+  diblokir browser, jadi aplikasi yang mewajibkan login Google tidak cocok.
+- Kalau kamu memperbarui script, pakai Terapkan → Kelola deployment →
+  ikon pensil → Versi: Versi baru → Terapkan. Link /exec tetap sama, jadi
+  folder ini tidak perlu diubah. Kalau kamu membuat deployment BARU, link-nya
+  berubah: buat ulang paket PWA ini dengan link baru.
+- Data tetap tersimpan di Google Sheets milikmu seperti biasa.
