@@ -57,6 +57,17 @@ function network() { document.getElementById("offline").style.display = navigato
 addEventListener("online", function () { network(); if (link) frame.src = link; });
 addEventListener("offline", network);
 network();
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    // Mencari elemen berdasarkan ID atau atribut gambar badge Netlify
+    const netlifyBadge = document.getElementById('netlify-badge') || document.querySelector('img[alt*="Powered by Netlify"]');
+    if (netlifyBadge) {
+      // Jika elemen ditemukan di dalam wrapper-nya, hapus pembungkusnya atau elemen itu sendiri
+      const parentWrapper = netlifyBadge.closest('a') || netlifyBadge;
+      parentWrapper.remove();
+    }
+  });
+</script>  
 </script>
 </body>
 </html>
