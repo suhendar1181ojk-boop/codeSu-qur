@@ -1,5 +1,27 @@
 // Service worker for Kedai Kopi Wahid Su-Qur POS. Caches this small shell so the app opens
 // (and says so when there is no connection) even offline. The app itself always comes live from Google.
+const CACHE_NAME = 'suqur-pos-v1';
+const urlsToCache = [
+  '/',
+  '/index.html',
+  // Tambahkan aset penting lain seperti file CSS atau JS jika diperlukan
+];
+
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(urlsToCache);
+    })
+  );
+});
+
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request);
+    })
+  );
+});
 const CACHE = "kedai-kopi-wahid-su-qur-pos-pwa-1794222102403";
 const SHELL = ["./", "index.html", "app-link.js", "manifest.webmanifest", "offline.html", "icon-192.png", "icon-512.png", "icon-maskable-512.png", "apple-touch-icon.png", "favicon.png"];
 const HOME = "index.html";
