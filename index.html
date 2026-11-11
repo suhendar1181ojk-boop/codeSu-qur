@@ -57,6 +57,13 @@ function network() { document.getElementById("offline").style.display = navigato
 addEventListener("online", function () { network(); if (link) frame.src = link; });
 addEventListener("offline", network);
 network();
+#netlify-badge, 
+img[alt="Powered by Netlify"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
 <script>
   window.addEventListener('DOMContentLoaded', () => {
     // Mencari elemen berdasarkan ID atau atribut gambar badge Netlify
